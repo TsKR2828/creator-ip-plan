@@ -1,0 +1,34 @@
+/* 列印樣式：只印報告，不印任何介面元素 */
+@page { margin: 18mm 16mm; }
+
+#app, #toast, noscript { display: none !important; }
+#print-report { display: block !important; }
+
+html, body {
+  background: #fff !important;
+  color: #111 !important;
+  font-size: 11pt;
+  line-height: 1.75;
+}
+
+.report {
+  background: none !important;
+  border: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  color: #111;
+}
+.report h1 { font-size: 20pt; margin: 0 0 2pt; }
+.report .date { color: #555; font-size: 10pt; margin: 0 0 16pt; }
+.report h2 {
+  font-size: 14pt; margin: 18pt 0 8pt; padding-bottom: 3pt;
+  border-bottom: 0.75pt solid #8a6a2e;
+  break-after: avoid; page-break-after: avoid;
+}
+.report h3 {
+  font-size: 11.5pt; margin: 10pt 0 2pt;
+  break-after: avoid; page-break-after: avoid;
+}
+.report .text { white-space: pre-wrap; margin: 0; orphans: 3; widows: 3; }
+.report ul { padding-left: 14pt; margin: 0; }
+.report .empty { color: #555; }

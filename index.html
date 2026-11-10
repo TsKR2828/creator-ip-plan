@@ -1,0 +1,722 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>創作者 IP 規劃</title>
+<link rel="stylesheet" href="print.css" media="print">
+<style>
+:root {
+  --bg: #f3eee3;
+  --surface: #fbf8f1;
+  --ink: #1b2030;
+  --muted: #5d6170;
+  --rule: rgba(27, 32, 48, .13);
+  --rule-strong: rgba(27, 32, 48, .30);
+  --accent: #7a5c24;
+  --accent-soft: rgba(154, 120, 52, .13);
+  --btn-bg: #1b2030;
+  --btn-ink: #f3eee3;
+  --danger: #9b2c2c;
+  --serif: "Noto Serif TC", "Source Han Serif TC", "Songti TC", "PMingLiU", serif;
+  --sans: system-ui, -apple-system, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #141924;
+    --surface: #1b2130;
+    --ink: #ebe3d2;
+    --muted: #a3a7b3;
+    --rule: rgba(235, 227, 210, .11);
+    --rule-strong: rgba(235, 227, 210, .28);
+    --accent: #c9a86a;
+    --accent-soft: rgba(201, 168, 106, .13);
+    --btn-bg: #c9a86a;
+    --btn-ink: #141924;
+    --danger: #e59a9a;
+  }
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 17px/1.8 var(--sans);
+  letter-spacing: .01em;
+}
+button, input, textarea { font: inherit; color: inherit; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.wrap { max-width: 40rem; margin: 0 auto; padding: 1.75rem 16px 3rem; }
+.wrap.has-bar { padding-bottom: 7.5rem; }
+h1, h2, h3 { font-family: var(--serif); font-weight: 600; line-height: 1.4; margin: 0; }
+p { margin: 0; }
+.muted { color: var(--muted); }
+.label {
+  font-size: .78rem; letter-spacing: .12em; color: var(--accent);
+  font-weight: 600; margin-bottom: .25rem;
+}
+.rule-double { border: 0; border-top: 1px solid var(--accent); height: 3px; border-bottom: 1px solid var(--accent); opacity: .55; margin: 0 0 1.5rem; width: 3.5rem; }
+
+/* buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .4em;
+  min-height: 46px; padding: 0 1.1rem; border-radius: 4px;
+  border: 1px solid var(--rule-strong); background: transparent; cursor: pointer;
+  font-size: .95rem; text-decoration: none; white-space: nowrap;
+}
+.btn:hover { border-color: var(--accent); }
+.btn.primary { background: var(--btn-bg); color: var(--btn-ink); border-color: var(--btn-bg); font-weight: 600; }
+.btn.primary:hover { filter: brightness(1.12); }
+.btn.quiet { border-color: transparent; color: var(--muted); }
+.btn.quiet:hover { color: var(--ink); border-color: var(--rule); }
+.btn.danger { color: var(--danger); border-color: transparent; }
+.btn.danger:hover { border-color: var(--danger); }
+.btn[disabled] { opacity: .4; cursor: default; }
+.btn-row { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.5rem; }
+
+/* top bar */
+.bar {
+  position: sticky; top: 0; z-index: 5; background: var(--bg);
+  border-bottom: 1px solid var(--rule);
+}
+.bar-inner {
+  max-width: 40rem; margin: 0 auto; padding: .55rem 16px;
+  display: flex; align-items: center; gap: .75rem; font-size: .85rem; color: var(--muted);
+}
+.bar-inner .grow { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bar-link { background: none; border: 0; padding: .35rem 0; cursor: pointer; color: var(--ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--rule-strong); }
+.bar-link:hover { text-decoration-color: var(--accent); }
+.progress { height: 2px; background: var(--rule); }
+.progress i { display: block; height: 100%; background: var(--accent); transition: width .25s; }
+
+/* welcome */
+.welcome h1 { font-size: 1.9rem; margin-bottom: 1rem; }
+.welcome .eyebrow { font-size: .85rem; letter-spacing: .2em; color: var(--accent); margin-bottom: .9rem; }
+.lead { font-size: 1.05rem; }
+.facts { list-style: none; padding: 0; margin: 1.5rem 0 0; border-top: 1px solid var(--rule); }
+.facts li { padding: .6rem 0; border-bottom: 1px solid var(--rule); font-size: .95rem; }
+.facts li::before { content: "—"; color: var(--accent); margin-right: .6em; }
+.resume { margin-top: 1.75rem; padding: 1rem 1.1rem; background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; font-size: .95rem; }
+
+/* fill */
+.crumb { font-size: .85rem; color: var(--muted); margin-bottom: .6rem; }
+.sec-desc { font-size: .92rem; color: var(--muted); padding: .7rem 0 .9rem; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); margin-bottom: 1.4rem; }
+.fill h1 { font-size: 1.65rem; margin-bottom: 1.2rem; }
+.fill h1 .en { font-family: var(--sans); font-weight: 400; font-size: .95rem; color: var(--muted); }
+.asking { font-family: var(--serif); font-size: 1.2rem; line-height: 1.7; margin-bottom: 1.5rem; }
+.guide { margin: 0 0 1.5rem; }
+.guide dt { font-size: .78rem; letter-spacing: .12em; color: var(--accent); font-weight: 600; }
+.guide dd { margin: .1rem 0 1rem; }
+.guide dd.calc { white-space: pre-line; font-size: .93rem; background: var(--accent-soft); padding: .6rem .8rem; border-radius: 3px; }
+.example {
+  margin: 0 0 1.8rem; background: var(--surface); border: 1px solid var(--rule);
+  border-left: 3px solid var(--accent); border-radius: 0 4px 4px 0; padding: .9rem 1.1rem;
+}
+.example figcaption { font-size: .78rem; letter-spacing: .12em; color: var(--accent); font-weight: 600; margin-bottom: .3rem; }
+.example p { white-space: pre-line; font-size: .97rem; }
+.refs { margin: 0 0 1.8rem; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: .7rem 0; }
+.refs summary { cursor: pointer; font-size: .9rem; color: var(--accent); font-weight: 600; }
+.ref { margin-top: .7rem; }
+.ref-name { font-size: .82rem; color: var(--muted); }
+.ref-text { white-space: pre-line; font-size: .93rem; }
+.answer-label { display: block; font-size: .78rem; letter-spacing: .12em; color: var(--accent); font-weight: 600; margin-bottom: .35rem; }
+textarea {
+  display: block; width: 100%; min-height: 10rem; resize: vertical;
+  background: var(--surface); border: 1px solid var(--rule-strong); border-radius: 4px;
+  padding: .8rem .9rem; line-height: 1.75; font-size: 1rem;
+}
+textarea:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: transparent; }
+.saved { font-size: .8rem; color: var(--muted); margin-top: .4rem; min-height: 1.3em; }
+.saved.err { color: var(--danger); }
+
+.actions {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 5;
+  background: var(--bg); border-top: 1px solid var(--rule);
+  padding: .65rem 16px calc(.65rem + env(safe-area-inset-bottom));
+}
+.actions-inner { max-width: 40rem; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr 1.6fr; gap: .5rem; }
+.actions .btn { padding: 0 .6rem; }
+
+/* overview */
+.overview h1, .adv h1, .export h1 { font-size: 1.65rem; margin-bottom: .6rem; }
+.tally { display: flex; flex-wrap: wrap; gap: .3rem 1.2rem; font-size: .92rem; color: var(--muted); margin-bottom: .4rem; }
+.tally b { color: var(--ink); font-weight: 600; }
+.nudge { font-size: .95rem; margin: .8rem 0 0; padding: .65rem .9rem; background: var(--accent-soft); border-radius: 3px; }
+.ov-sec { margin-top: 2rem; }
+.ov-sec h2 { font-size: 1.15rem; display: flex; align-items: baseline; gap: .6rem; padding-bottom: .4rem; border-bottom: 1px solid var(--accent); }
+.ov-sec h2 small { font-family: var(--sans); font-weight: 400; font-size: .78rem; color: var(--muted); letter-spacing: .1em; }
+.ov-list { list-style: none; margin: 0; padding: 0; }
+.ov-item {
+  display: grid; grid-template-columns: 3.2rem 1fr; column-gap: .8rem; width: 100%;
+  text-align: left; background: none; border: 0; border-bottom: 1px solid var(--rule);
+  padding: .75rem .2rem; cursor: pointer;
+}
+.ov-item:hover { background: var(--accent-soft); }
+.ov-name { font-weight: 600; }
+.ov-sum { grid-column: 2; font-size: .88rem; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.st {
+  grid-row: span 2; align-self: start; margin-top: .25rem;
+  font-size: .72rem; text-align: center; padding: .05rem 0; border-radius: 3px; letter-spacing: .08em;
+  border: 1px solid var(--rule-strong); color: var(--muted);
+}
+.st-filled { background: var(--accent); border-color: var(--accent); color: var(--bg); font-weight: 600; }
+.st-skipped { border-style: dashed; }
+.ov-foot { margin-top: 2.5rem; padding-top: 1.2rem; border-top: 1px solid var(--rule); }
+
+/* advanced */
+.adv-list { margin-top: 1.5rem; border-top: 1px solid var(--rule); }
+.check { display: grid; grid-template-columns: 1.6rem 1fr; gap: .6rem; padding: .9rem .2rem; border-bottom: 1px solid var(--rule); cursor: pointer; }
+.check:hover { background: var(--accent-soft); }
+.check input { width: 1.15rem; height: 1.15rem; margin-top: .35rem; accent-color: var(--accent); }
+.check b { font-family: var(--serif); font-weight: 600; font-size: 1.05rem; }
+.check .meta { font-size: .82rem; color: var(--muted); margin-left: .4rem; }
+.check .desc { display: block; font-size: .9rem; color: var(--muted); }
+
+/* report */
+.report { margin-top: 2rem; background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; padding: 1.6rem 1.3rem 2rem; }
+.report h1 { font-size: 1.6rem; margin-bottom: .2rem; }
+.report .date { color: var(--muted); font-size: .9rem; margin-bottom: 1.6rem; }
+.report h2 { font-size: 1.2rem; margin: 1.8rem 0 .8rem; padding-bottom: .35rem; border-bottom: 1px solid var(--accent); }
+.report h3 { font-size: 1rem; margin: 1.1rem 0 .25rem; }
+.report .text { white-space: pre-wrap; }
+.report ul { padding-left: 1.2rem; margin: 0; }
+.report .empty { color: var(--muted); }
+.fallback { margin-top: 1rem; }
+.fallback textarea { min-height: 14rem; font-family: ui-monospace, Consolas, monospace; font-size: .85rem; }
+
+.notice h1 { font-size: 1.5rem; margin-bottom: 1rem; }
+.notice p + p { margin-top: .8rem; }
+.notice code { background: var(--surface); padding: .1rem .35rem; border-radius: 3px; font-size: .9em; }
+
+#toast {
+  position: fixed; left: 50%; bottom: 6.2rem; transform: translateX(-50%) translateY(1rem);
+  max-width: calc(100% - 32px); width: max-content; z-index: 20;
+  background: var(--ink); color: var(--bg); font-size: .9rem; line-height: 1.6;
+  padding: .6rem 1rem; border-radius: 4px; opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s;
+}
+#toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+#print-report { display: none; }
+
+@media (min-width: 640px) {
+  .welcome h1 { font-size: 2.3rem; }
+  .wrap { padding-top: 2.5rem; }
+  .report { padding: 2.2rem 2.4rem 2.6rem; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<div id="app"><main class="wrap"><p class="muted">載入中…</p></main></div>
+<div id="print-report"></div>
+<div id="toast" role="status" aria-live="polite"></div>
+<noscript><main class="wrap"><p>這個工具需要開啟 JavaScript 才能使用。</p></main></noscript>
+
+<script>
+(() => {
+  'use strict';
+
+  const KEY = 'ipplan.v1';
+  const VERSION = 1;
+  const $app = document.getElementById('app');
+  const $print = document.getElementById('print-report');
+  const $toast = document.getElementById('toast');
+
+  let C = null;            // content.json
+  let S = null;            // 使用者狀態
+  let cellIndex = {};      // id -> { cell, sec }
+  let mismatchRaw = null;  // 讀到不同版本的舊資料
+  let saveTimer = null;
+  let saveFailed = false;
+  let ctx = null;          // 目前填寫頁的上下文
+
+  /* ---------- 小工具 ---------- */
+  const esc = s => String(s ?? '').replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
+  const pad = n => String(n).padStart(2, '0');
+  const fmtDate = d => `${d.getFullYear()} 年 ${d.getMonth() + 1} 月 ${d.getDate()} 日`;
+  const fmtDateTime = d => `${d.getFullYear()}/${pad(d.getMonth() + 1)}/${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+
+  let toastTimer = null;
+  function toast(msg, ms = 4200) {
+    $toast.textContent = msg;
+    $toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => $toast.classList.remove('show'), ms);
+  }
+
+  /* ---------- 儲存 ---------- */
+  const blankState = () => ({ version: VERSION, updatedAt: null, currentCell: null, enabledSections: [], answers: {} });
+
+  function loadState() {
+    let raw = null;
+    try { raw = localStorage.getItem(KEY); }
+    catch (e) {
+      setTimeout(() => toast('這個瀏覽器不允許儲存，關掉分頁後內容會不見。記得填完先匯出。', 6000), 300);
+      return blankState();
+    }
+    if (!raw) return blankState();
+    try {
+      const s = JSON.parse(raw);
+      if (!s || typeof s !== 'object' || s.version !== VERSION) { mismatchRaw = raw; return blankState(); }
+      s.answers = s.answers && typeof s.answers === 'object' ? s.answers : {};
+      s.enabledSections = Array.isArray(s.enabledSections) ? s.enabledSections : [];
+      return s;
+    } catch (e) {
+      mismatchRaw = raw;
+      return blankState();
+    }
+  }
+
+  function save() {
+    clearTimeout(saveTimer); saveTimer = null;
+    if (mismatchRaw) return; // 還沒決定怎麼處理舊資料前，不覆蓋
+    S.updatedAt = new Date().toISOString();
+    try {
+      localStorage.setItem(KEY, JSON.stringify(S));
+      if (saveFailed) { saveFailed = false; toast('自動儲存恢復正常。'); }
+      setSavedLabel('ok');
+    } catch (e) {
+      if (!saveFailed) toast('儲存失敗：內容還在畫面上，但關掉分頁可能會不見。建議先到匯出頁複製 Markdown 備份。', 7000);
+      saveFailed = true;
+      setSavedLabel('err');
+    }
+  }
+  const scheduleSave = () => { clearTimeout(saveTimer); saveTimer = setTimeout(save, 400); };
+  const flush = () => { if (saveTimer) save(); };
+
+  function setSavedLabel(state) {
+    const el = document.getElementById('saved');
+    if (!el) return;
+    el.classList.toggle('err', state === 'err');
+    const ta = document.getElementById('answer');
+    el.textContent = state === 'err' ? '儲存失敗，內容只在這個畫面上'
+      : state === 'pending' || !(ta && ta.value) ? '' : '已自動儲存';
+  }
+
+  /* ---------- 內容與狀態查詢 ---------- */
+  function indexContent() {
+    cellIndex = {};
+    C.sections.forEach(sec => sec.cells.forEach(cell => { cellIndex[cell.id] = { cell, sec }; }));
+  }
+  const coreSections = () => C.sections.filter(s => s.tier === 'core');
+  const advSections = () => C.sections.filter(s => s.tier === 'advanced');
+  const enabledAdv = () => advSections().filter(s => S.enabledSections.includes(s.id));
+  const flowFor = tier => (tier === 'core' ? coreSections() : enabledAdv()).flatMap(s => s.cells);
+  const ans = id => S.answers[id] || { text: '', skipped: false };
+  const statusOf = id => { const a = ans(id); return (a.text || '').trim() ? 'filled' : a.skipped ? 'skipped' : 'empty'; };
+  const hasData = () => Object.values(S.answers).some(a => (a.text || '').trim() || a.skipped);
+  const titleCell = () => C.sections.flatMap(s => s.cells).find(c => c.role === 'reportTitle');
+
+  /* ---------- 路由 ---------- */
+  function go(path) {
+    const target = '#/' + path;
+    if (location.hash === target) render();
+    else location.hash = target;
+  }
+
+  function render() {
+    flush();
+    ctx = null;
+    if (mismatchRaw) return renderMismatch();
+    const h = decodeURIComponent(location.hash.replace(/^#\/?/, ''));
+    const i = h.indexOf('/');
+    const screen = i < 0 ? h : h.slice(0, i);
+    const arg = i < 0 ? '' : h.slice(i + 1);
+    window.scrollTo(0, 0);
+    switch (screen) {
+      case 'fill': return renderFill(arg);
+      case 'overview': return renderOverview();
+      case 'advanced': return renderAdvanced();
+      case 'export': return renderExport();
+      default: return renderWelcome();
+    }
+  }
+
+  function bar(left, right, pct) {
+    return `<header class="bar"><div class="bar-inner">
+      ${left}<span class="grow"></span>${right || ''}
+    </div>${pct != null ? `<div class="progress" aria-hidden="true"><i style="width:${pct}%"></i></div>` : ''}</header>`;
+  }
+
+  /* ---------- 開場 ---------- */
+  function renderWelcome() {
+    const coreCount = flowFor('core').length;
+    let resume = '';
+    let buttons = `<button class="btn primary" data-act="start">開始</button>`;
+    if (hasData()) {
+      const cur = S.currentCell && cellIndex[S.currentCell];
+      let where = '';
+      if (cur) {
+        const flow = flowFor(cur.sec.tier);
+        const idx = flow.findIndex(c => c.id === S.currentCell);
+        if (idx >= 0) where = `「${esc(cur.cell.title)}」（${cur.sec.tier === 'core' ? '核心' : '進階'}第 ${idx + 1} 格／共 ${flow.length} 格）`;
+      }
+      const when = S.updatedAt ? fmtDateTime(new Date(S.updatedAt)) : '';
+      resume = `<div class="resume">
+        <p class="label">上次的進度</p>
+        <p>${where ? `填到 ${where}` : '有填過的內容'}${when ? `<br><span class="muted">${when}</span>` : ''}</p>
+      </div>`;
+      buttons = `<button class="btn primary" data-act="resume">接續上次</button>
+        <button class="btn" data-act="start">從第一格開始</button>
+        <button class="btn quiet" data-act="overview">看總覽</button>`;
+    }
+    $app.innerHTML = `<main class="wrap welcome">
+      <p class="eyebrow">創作者 IP 規劃</p>
+      <h1>把自己當成一個 IP，<br>一格一格想清楚。</h1>
+      <hr class="rule-double">
+      <p class="lead">這個工具一次問你一個問題。每一題都附上說明，還有一位虛構創作者「阿路」的填法給你參考。填完之後，匯出一份你自己的 IP 規劃。</p>
+      <ul class="facts">
+        <li>核心 ${coreCount} 格，大約 60–90 分鐘，可以分好幾次填</li>
+        <li>資料只存在你自己的瀏覽器，不會上傳到任何地方</li>
+        <li>每一格都可以先跳過，不會擋住匯出</li>
+      </ul>
+      ${resume}
+      <div class="btn-row">${buttons}</div>
+    </main>`;
+  }
+
+  /* ---------- 填寫頁 ---------- */
+  function renderFill(id) {
+    const entry = cellIndex[id];
+    if (!entry) return go('overview');
+    const { cell, sec } = entry;
+    const tier = sec.tier;
+    const flow = flowFor(tier);
+    const idx = flow.findIndex(c => c.id === id);
+    if (idx < 0) return go('overview'); // 進階區塊沒勾
+    ctx = { id, tier, flow, idx };
+    if (S.currentCell !== id) { S.currentCell = id; scheduleSave(); }
+
+    const a = ans(id);
+    const last = idx === flow.length - 1;
+    const pct = Math.round((idx + 1) / flow.length * 100);
+    const tierLabel = tier === 'core' ? '核心' : '進階';
+    const firstOfSec = sec.cells[0].id === id;
+    const nextLabel = last ? (tier === 'core' ? '完成，看總覽' : '完成，回總覽') : '下一格';
+
+    $app.innerHTML = `
+      ${bar(`<button class="bar-link" data-act="overview">總覽</button>`,
+            `<span>${tierLabel}　第 ${idx + 1} 格／共 ${flow.length} 格</span>`, pct)}
+      <main class="wrap fill has-bar">
+        <p class="crumb">${esc(sec.title)}</p>
+        ${firstOfSec && sec.desc ? `<p class="sec-desc">${esc(sec.desc)}</p>` : ''}
+        <h1 id="cell-title" tabindex="-1">${esc(cell.title)}${cell.titleEn ? ` <span class="en">（${esc(cell.titleEn)}）</span>` : ''}</h1>
+        <p class="label">在問什麼</p>
+        <p class="asking">${esc(cell.asking)}</p>
+        <dl class="guide">
+          <dt>為什麼要先想這個</dt><dd>${esc(cell.why)}</dd>
+          <dt>常見卡點</dt><dd>${esc(cell.stuck)}</dd>
+          ${cell.calc ? `<dt>怎麼算・去哪看</dt><dd class="calc">${esc(cell.calc)}</dd>` : ''}
+        </dl>
+        <figure class="example"><figcaption>範例・阿路</figcaption><p>${esc(cell.example)}</p></figure>
+        ${refsHTML(cell)}
+        <label class="answer-label" for="answer">你的答案</label>
+        <textarea id="answer" spellcheck="false" placeholder="想到什麼先寫下來，之後隨時可以回來改。">${esc(a.text)}</textarea>
+        <p class="saved" id="saved" aria-live="polite">${a.text ? '已自動儲存' : ''}</p>
+        <p class="muted" style="font-size:.8rem">${a.skipped && !a.text ? '這格先前跳過了。' : ''}</p>
+      </main>
+      <nav class="actions" aria-label="切換格子"><div class="actions-inner">
+        <button class="btn" data-act="prev">上一格</button>
+        <button class="btn quiet" data-act="skip">先跳過</button>
+        <button class="btn primary" data-act="next">${nextLabel}</button>
+      </div></nav>`;
+
+    const ta = document.getElementById('answer');
+    autosize(ta);
+    ta.addEventListener('input', () => {
+      S.answers[id] = { text: ta.value, skipped: false };
+      autosize(ta);
+      setSavedLabel('pending');
+      scheduleSave();
+    });
+    ta.addEventListener('keydown', e => {
+      if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); actions.next(); }
+    });
+    document.getElementById('cell-title').focus({ preventScroll: true });
+  }
+
+  function refsHTML(cell) {
+    if (!cell.refs || !cell.refs.length) return '';
+    const items = cell.refs.map(r => cellIndex[r]).filter(Boolean)
+      .map(({ cell: c }) => ({ c, text: (ans(c.id).text || '').trim() }));
+    const filled = items.filter(i => i.text);
+    const body = filled.length
+      ? filled.map(i => `<div class="ref"><p class="ref-name">${esc(i.c.title)}</p><p class="ref-text">${esc(i.text)}</p></div>`).join('')
+      : `<p class="muted" style="margin-top:.5rem;font-size:.92rem">前面的指標格都還沒填。可以先回去填，或直接寫你想追的數字。</p>`;
+    return `<details class="refs" open><summary>你前面填過的指標（${filled.length}／${items.length}）</summary>${body}</details>`;
+  }
+
+  function autosize(ta) {
+    ta.style.height = 'auto';
+    ta.style.height = Math.max(ta.scrollHeight + 2, 160) + 'px';
+  }
+
+  /* ---------- 總覽 ---------- */
+  function renderOverview() {
+    const core = flowFor('core');
+    const count = { filled: 0, skipped: 0, empty: 0 };
+    core.forEach(c => count[statusOf(c.id)]++);
+    const left = count.skipped + count.empty;
+    const secs = [...coreSections(), ...enabledAdv()];
+    const stLabel = { filled: '已填', skipped: '跳過', empty: '未填' };
+
+    const list = secs.map(sec => `
+      <section class="ov-sec">
+        <h2>${esc(sec.title)}<small>${sec.tier === 'core' ? '核心' : '進階'}</small></h2>
+        <ul class="ov-list">${sec.cells.map(c => {
+          const st = statusOf(c.id);
+          const text = (ans(c.id).text || '').trim().split('\n')[0];
+          return `<li><button class="ov-item" data-act="goto" data-id="${esc(c.id)}">
+            <span class="st st-${st}">${stLabel[st]}</span>
+            <span class="ov-name">${esc(c.title)}</span>
+            <span class="ov-sum">${text ? esc(text) : '—'}</span>
+          </button></li>`;
+        }).join('')}</ul>
+      </section>`).join('');
+
+    const advLabel = enabledAdv().length ? '調整或繼續填進階區塊' : '繼續填進階區塊';
+    $app.innerHTML = `
+      ${bar(`<button class="bar-link" data-act="home">開場</button>`, `<span>總覽</span>`)}
+      <main class="wrap overview">
+        <h1>總覽</h1>
+        <div class="tally">
+          <span>核心 ${core.length} 格</span>
+          <span>已填 <b>${count.filled}</b></span>
+          <span>跳過 <b>${count.skipped}</b></span>
+          <span>未填 <b>${count.empty}</b></span>
+        </div>
+        ${left ? `<p class="nudge">還有 ${left} 格沒填。沒填完也可以匯出，之後再回來補。</p>`
+               : `<p class="nudge">核心區塊全部填完了。</p>`}
+        <div class="btn-row">
+          <button class="btn primary" data-act="export">匯出報告</button>
+          <button class="btn" data-act="advanced">${advLabel}</button>
+        </div>
+        ${list}
+        <div class="ov-foot">
+          <button class="btn danger" data-act="clear">全部清除</button>
+        </div>
+      </main>`;
+  }
+
+  /* ---------- 進階區塊勾選 ---------- */
+  function renderAdvanced() {
+    const secs = advSections();
+    $app.innerHTML = `
+      ${bar(`<button class="bar-link" data-act="overview">總覽</button>`, `<span>進階區塊</span>`)}
+      <main class="wrap adv">
+        <h1>進階區塊</h1>
+        <p>這些是「填了更好」的部分。勾你想填的，沒勾的不會出現在流程和報告裡。之後隨時可以回來改。</p>
+        <div class="adv-list">${secs.map(s => {
+          const done = s.cells.filter(c => statusOf(c.id) === 'filled').length;
+          return `<label class="check">
+            <input type="checkbox" value="${esc(s.id)}" ${S.enabledSections.includes(s.id) ? 'checked' : ''}>
+            <span><b>${esc(s.title)}</b><span class="meta">${s.cells.length} 格${done ? `・已填 ${done}` : ''}</span>
+            ${s.desc ? `<span class="desc">${esc(s.desc)}</span>` : ''}</span>
+          </label>`;
+        }).join('')}</div>
+        <div class="btn-row">
+          <button class="btn primary" data-act="advStart" id="adv-start"></button>
+          <button class="btn quiet" data-act="overview">回總覽</button>
+        </div>
+      </main>`;
+    const update = () => {
+      const n = flowFor('advanced').length;
+      const b = document.getElementById('adv-start');
+      b.disabled = n === 0;
+      b.textContent = n ? `開始填（${n} 格）` : '先勾一組';
+    };
+    $app.querySelectorAll('.check input').forEach(inp => inp.addEventListener('change', () => {
+      const on = new Set([...$app.querySelectorAll('.check input:checked')].map(i => i.value));
+      S.enabledSections = advSections().map(s => s.id).filter(id => on.has(id)); // 照 content.json 的順序
+      save();
+      update();
+    }));
+    update();
+  }
+
+  /* ---------- 報告 ---------- */
+  function reportData() {
+    const tc = titleCell();
+    const name = tc ? (ans(tc.id).text || '').trim().split('\n')[0] : '';
+    const secs = [...C.sections]
+      .filter(s => s.tier === 'core' || S.enabledSections.includes(s.id))
+      .map(s => ({
+        title: s.title,
+        cells: s.cells
+          .filter(c => c.role !== 'reportTitle' && (ans(c.id).text || '').trim())
+          .map(c => ({ title: c.title, text: ans(c.id).text.trim() }))
+      }))
+      .filter(s => s.cells.length);
+    return { title: `${name || '我'}的 IP 規劃`, date: fmtDate(new Date()), secs, appendix: C.appendix || '' };
+  }
+
+  function buildMarkdown() {
+    const r = reportData();
+    // 使用者文字開頭若有 #，跳脫掉，避免打亂標題階層
+    const safe = t => t.replace(/^(\s*)(#+)/gm, (m, sp, h) => sp + '\\' + h);
+    const out = [`# ${r.title}`, '', r.date, ''];
+    r.secs.forEach(s => {
+      out.push(`## ${s.title}`, '');
+      s.cells.forEach(c => out.push(`### ${c.title}`, '', safe(c.text), ''));
+    });
+    if (r.appendix) out.push('## 附錄：實作資源與工具', '', r.appendix, '');
+    return out.join('\n');
+  }
+
+  function appendixHTML(text) {
+    const lines = text.split('\n').filter(l => l.trim());
+    const items = lines.filter(l => /^\s*-\s+/.test(l));
+    if (items.length === lines.length) return `<ul>${items.map(l => `<li>${esc(l.replace(/^\s*-\s+/, ''))}</li>`).join('')}</ul>`;
+    return `<p class="text">${esc(text)}</p>`;
+  }
+
+  function reportHTML() {
+    const r = reportData();
+    return `<article class="report">
+      <h1>${esc(r.title)}</h1>
+      <p class="date">${esc(r.date)}</p>
+      ${r.secs.length ? r.secs.map(s => `<h2>${esc(s.title)}</h2>${s.cells.map(c => `<h3>${esc(c.title)}</h3><p class="text">${esc(c.text)}</p>`).join('')}`).join('')
+                      : `<p class="empty">還沒有填任何格子。回到總覽挑一格開始寫吧。</p>`}
+      ${r.appendix ? `<h2>附錄：實作資源與工具</h2>${appendixHTML(r.appendix)}` : ''}
+    </article>`;
+  }
+
+  function renderExport() {
+    $app.innerHTML = `
+      ${bar(`<button class="bar-link" data-act="overview">總覽</button>`, `<span>匯出</span>`)}
+      <main class="wrap export">
+        <h1>匯出報告</h1>
+        <p class="muted">報告只放你寫的內容；說明文字、沒填和跳過的格子都不會出現。</p>
+        <div class="btn-row">
+          <button class="btn primary" data-act="copyMd">複製 Markdown</button>
+          <button class="btn" data-act="print">列印／存成 PDF</button>
+          <button class="btn quiet" data-act="overview">回總覽</button>
+        </div>
+        <div id="fallback"></div>
+        ${reportHTML()}
+      </main>`;
+  }
+
+  async function copyMd() {
+    const md = buildMarkdown();
+    try {
+      await navigator.clipboard.writeText(md);
+      toast('已複製。可以貼到 Notion 或 Obsidian。');
+    } catch (e) {
+      const box = document.getElementById('fallback');
+      if (box) {
+        box.innerHTML = `<div class="fallback"><p class="label">瀏覽器不讓我直接複製，請全選下面的文字手動複製</p><textarea readonly>${esc(md)}</textarea></div>`;
+        const ta = box.querySelector('textarea');
+        ta.focus(); ta.select();
+      }
+    }
+  }
+
+  /* ---------- 版本不符 ---------- */
+  function renderMismatch() {
+    $app.innerHTML = `<main class="wrap notice">
+      <h1>資料格式已更新</h1>
+      <p>這個瀏覽器裡有一份舊格式的資料，新版工具讀不了。</p>
+      <p>你可以先把舊資料複製出來留著，再清除它重新開始。</p>
+      <div class="btn-row">
+        <button class="btn" data-act="copyOld">複製舊資料</button>
+        <button class="btn primary" data-act="clearOld">清除並重新開始</button>
+      </div>
+      <div id="fallback"></div>
+    </main>`;
+  }
+
+  /* ---------- 動作 ---------- */
+  function moveTo(delta) {
+    if (!ctx) return;
+    const { flow, idx, tier } = ctx;
+    const j = idx + delta;
+    if (j < 0) return go(tier === 'core' ? '' : 'advanced');
+    if (j >= flow.length) return go('overview');
+    go('fill/' + flow[j].id);
+  }
+
+  const actions = {
+    start: () => go('fill/' + flowFor('core')[0].id),
+    resume: () => {
+      const cur = S.currentCell && cellIndex[S.currentCell];
+      const ok = cur && flowFor(cur.sec.tier).some(c => c.id === S.currentCell);
+      go(ok ? 'fill/' + S.currentCell : 'fill/' + flowFor('core')[0].id);
+    },
+    home: () => go(''),
+    overview: () => go('overview'),
+    advanced: () => go('advanced'),
+    export: () => go('export'),
+    goto: d => go('fill/' + d.id),
+    next: () => moveTo(1),
+    prev: () => moveTo(-1),
+    skip: () => {
+      if (!ctx) return;
+      const a = ans(ctx.id);
+      if (!(a.text || '').trim()) S.answers[ctx.id] = { text: '', skipped: true };
+      save();
+      moveTo(1);
+    },
+    advStart: () => { const f = flowFor('advanced'); if (f.length) go('fill/' + f[0].id); },
+    copyMd,
+    print: () => { $print.innerHTML = reportHTML(); window.print(); },
+    clear: () => {
+      if (!confirm('確定要清除全部資料嗎？\n\n所有填過的內容都會刪除，沒辦法復原。')) return;
+      clearTimeout(saveTimer); saveTimer = null;
+      try { localStorage.removeItem(KEY); } catch (e) { /* 忽略 */ }
+      S = blankState();
+      toast('已清除。');
+      go('');
+    },
+    copyOld: async () => {
+      try { await navigator.clipboard.writeText(mismatchRaw); toast('舊資料已複製。'); }
+      catch (e) {
+        const box = document.getElementById('fallback');
+        box.innerHTML = `<div class="fallback"><textarea readonly>${esc(mismatchRaw)}</textarea></div>`;
+        box.querySelector('textarea').select();
+      }
+    },
+    clearOld: () => {
+      if (!confirm('確定要清除舊資料嗎？沒辦法復原。')) return;
+      try { localStorage.removeItem(KEY); } catch (e) { /* 忽略 */ }
+      mismatchRaw = null;
+      S = blankState();
+      go('');
+    }
+  };
+
+  $app.addEventListener('click', e => {
+    const b = e.target.closest('[data-act]');
+    if (!b || b.disabled) return;
+    const fn = actions[b.dataset.act];
+    if (fn) fn(b.dataset);
+  });
+
+  window.addEventListener('hashchange', render);
+  window.addEventListener('beforeprint', () => { if (C) $print.innerHTML = reportHTML(); });
+  window.addEventListener('pagehide', flush);
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') flush(); });
+
+  /* ---------- 啟動 ---------- */
+  fetch('content.json', { cache: 'no-cache' })
+    .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(json => {
+      C = json;
+      indexContent();
+      S = loadState();
+      render();
+    })
+    .catch(() => {
+      $app.innerHTML = `<main class="wrap notice">
+        <h1>讀不到題目檔</h1>
+        <p>找不到或讀不了 <code>content.json</code>。</p>
+        <p>如果你是直接點兩下打開 <code>index.html</code>，瀏覽器會擋住讀取本機檔案。請改用 GitHub Pages 的網址，或在這個資料夾開本機伺服器（見 README）。</p>
+      </main>`;
+    });
+})();
+</script>
+</body>
+</html>
