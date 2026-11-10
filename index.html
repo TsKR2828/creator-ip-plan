@@ -142,7 +142,7 @@ textarea:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-c
 .actions .btn { padding: 0 .6rem; }
 
 /* overview */
-.overview h1, .adv h1, .export h1 { font-size: 1.65rem; margin-bottom: .6rem; }
+.overview h1, .export h1 { font-size: 1.65rem; margin-bottom: .6rem; }
 .tally { display: flex; flex-wrap: wrap; gap: .3rem 1.2rem; font-size: .92rem; color: var(--muted); margin-bottom: .4rem; }
 .tally b { color: var(--ink); font-weight: 600; }
 .nudge { font-size: .95rem; margin: .8rem 0 0; padding: .65rem .9rem; background: var(--accent-soft); border-radius: 3px; }
@@ -167,14 +167,60 @@ textarea:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-c
 .st-skipped { border-style: dashed; }
 .ov-foot { margin-top: 2.5rem; padding-top: 1.2rem; border-top: 1px solid var(--rule); }
 
-/* advanced */
-.adv-list { margin-top: 1.5rem; border-top: 1px solid var(--rule); }
-.check { display: grid; grid-template-columns: 1.6rem 1fr; gap: .6rem; padding: .9rem .2rem; border-bottom: 1px solid var(--rule); cursor: pointer; }
-.check:hover { background: var(--accent-soft); }
-.check input { width: 1.15rem; height: 1.15rem; margin-top: .35rem; accent-color: var(--accent); }
-.check b { font-family: var(--serif); font-weight: 600; font-size: 1.05rem; }
-.check .meta { font-size: .82rem; color: var(--muted); margin-left: .4rem; }
-.check .desc { display: block; font-size: .9rem; color: var(--muted); }
+/* quests */
+.quest { margin-top: 2.2rem; }
+.q-head { padding-bottom: .5rem; border-bottom: 1px solid var(--accent); }
+.q-no { font-size: .78rem; letter-spacing: .12em; color: var(--accent); font-weight: 600; display: flex; align-items: center; gap: .7rem; }
+.q-state { font-weight: 400; letter-spacing: .08em; color: var(--muted); border: 1px solid var(--rule-strong); border-radius: 3px; padding: 0 .45rem; font-size: .72rem; line-height: 1.6; }
+.q-state.q-done { background: var(--accent); border-color: var(--accent); color: var(--bg); font-weight: 600; }
+.q-state.q-locked { border-style: dashed; }
+.q-head h2 { font-size: 1.2rem; display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 .6rem; }
+.q-head h2 small, .q-divider small { font-family: var(--sans); font-weight: 400; font-size: .8rem; color: var(--muted); }
+.q-reward { font-size: .88rem; color: var(--muted); margin-top: .15rem; }
+.q-reward span { color: var(--accent); font-weight: 600; font-size: .75rem; letter-spacing: .12em; margin-right: .7em; }
+.q-desc, .q-note { font-size: .92rem; color: var(--muted); padding: .7rem .2rem 0; }
+.q-foot { padding: .8rem .2rem 0; }
+.quest.is-locked .q-head { border-bottom-style: dashed; border-bottom-color: var(--rule-strong); }
+.q-divider { margin-top: 3.2rem; font-size: 1.35rem; display: flex; flex-direction: column; gap: .2rem; }
+.license { background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; padding: 1rem 1.1rem 1.1rem; }
+.license .q-desc, .license .q-foot { padding-left: 0; padding-right: 0; }
+.crumb b { color: var(--accent); font-weight: 600; }
+
+/* character sheet */
+.sheet .eyebrow { font-size: .85rem; letter-spacing: .2em; color: var(--accent); margin-bottom: .6rem; }
+.sheet h1 { font-size: 1.9rem; overflow-wrap: anywhere; }
+.epithet { font-family: var(--serif); font-size: 1.05rem; margin-top: .3rem; }
+.epithet.none { font-family: var(--sans); font-size: .88rem; color: var(--muted); }
+.sh-stats { display: grid; grid-template-columns: repeat(3, 1fr); margin: 1.4rem 0 .5rem; border: 1px solid var(--rule-strong); border-radius: 4px; background: var(--surface); }
+.sh-stats div { padding: .6rem .8rem; min-width: 0; }
+.sh-stats div + div { border-left: 1px solid var(--rule); }
+.sh-stats dt { font-size: .72rem; letter-spacing: .12em; color: var(--accent); font-weight: 600; }
+.sh-stats dd { margin: 0; font-family: var(--serif); font-weight: 600; font-size: 1.02rem; }
+.small { font-size: .8rem; }
+.sh-block { margin-top: 1.9rem; }
+.sh-block h2 { font-size: 1.1rem; border-bottom: 1px solid var(--accent); }
+.sh-link { display: flex; width: 100%; align-items: baseline; justify-content: space-between; gap: .6rem; background: none; border: 0; padding: 0 0 .35rem; cursor: pointer; font: inherit; color: inherit; text-align: left; }
+.sh-link small { font-family: var(--sans); font-weight: 400; font-size: .78rem; color: var(--muted); letter-spacing: .08em; white-space: nowrap; }
+.sh-link:hover small { color: var(--accent); }
+.sh-rows { margin: 0; display: grid; grid-template-columns: 6.5rem 1fr; }
+.sh-rows dt, .sh-rows dd { padding: .5rem .2rem; border-bottom: 1px solid var(--rule); margin: 0; }
+.sh-rows dt { font-size: .85rem; color: var(--muted); }
+.sh-rows dt small { display: block; font-size: .72rem; line-height: 1.4; }
+.sh-rows dd { font-size: .95rem; overflow-wrap: anywhere; }
+.sh-block.is-empty h2 { border-bottom-style: dashed; border-bottom-color: var(--rule-strong); }
+.sh-empty { font-size: .88rem; color: var(--muted); padding: .5rem .2rem; }
+
+/* chapter done */
+.stamp {
+  display: inline-flex; align-items: center; justify-content: center; width: 5.2rem; height: 5.2rem;
+  border: 2px solid var(--accent); border-radius: 50%; outline: 1px solid var(--accent); outline-offset: 3px;
+  color: var(--accent); font-family: var(--serif); font-weight: 600; font-size: 1.25rem;
+  letter-spacing: .2em; text-indent: .2em; transform: rotate(-8deg); margin: 1rem 0 1.6rem .5rem;
+}
+.done h1 { font-size: 1.65rem; margin-bottom: 1.2rem; }
+.done-list { margin: 0; border-top: 1px solid var(--rule); }
+.done-list dt { font-size: .78rem; letter-spacing: .12em; color: var(--accent); font-weight: 600; padding-top: .7rem; }
+.done-list dd { margin: 0; padding-bottom: .7rem; border-bottom: 1px solid var(--rule); }
 
 /* report */
 .report { margin-top: 2rem; background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; padding: 1.6rem 1.3rem 2rem; }
@@ -219,8 +265,9 @@ textarea:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-c
 (() => {
   'use strict';
 
-  const KEY = 'ipplan.v1';
-  const VERSION = 1;
+  const KEY = 'ipplan.v2';
+  const KEY_V1 = 'ipplan.v1'; // 上一版的資料，轉換後留著不刪，直到使用者按「全部清除」
+  const VERSION = 2;
   const $app = document.getElementById('app');
   const $print = document.getElementById('print-report');
   const $toast = document.getElementById('toast');
@@ -248,26 +295,53 @@ textarea:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-c
   }
 
   /* ---------- 儲存 ---------- */
-  const blankState = () => ({ version: VERSION, updatedAt: null, currentCell: null, enabledSections: [], answers: {} });
+  // class／shop／milestones／route／logs 是第 2–4 期才會用到的欄位，先留空位，之後不用再轉一次
+  const blankState = () => ({
+    version: VERSION, updatedAt: null, currentCell: null, enabledSections: [], answers: {},
+    class: { main: null, sub: null }, shop: {}, milestones: {}, route: null, logs: []
+  });
+
+  function normalize(s) {
+    const b = blankState();
+    return {
+      ...b, ...s, version: VERSION,
+      answers: s.answers && typeof s.answers === 'object' ? s.answers : {},
+      enabledSections: Array.isArray(s.enabledSections) ? s.enabledSections : [],
+      class: s.class && typeof s.class === 'object' ? s.class : b.class,
+      shop: s.shop && typeof s.shop === 'object' ? s.shop : {},
+      milestones: s.milestones && typeof s.milestones === 'object' ? s.milestones : {},
+      logs: Array.isArray(s.logs) ? s.logs : []
+    };
+  }
 
   function loadState() {
-    let raw = null;
-    try { raw = localStorage.getItem(KEY); }
+    let raw = null, rawV1 = null;
+    try { raw = localStorage.getItem(KEY); rawV1 = localStorage.getItem(KEY_V1); }
     catch (e) {
       setTimeout(() => toast('這個瀏覽器不允許儲存，關掉分頁後內容會不見。記得填完先匯出。', 6000), 300);
       return blankState();
     }
-    if (!raw) return blankState();
-    try {
-      const s = JSON.parse(raw);
-      if (!s || typeof s !== 'object' || s.version !== VERSION) { mismatchRaw = raw; return blankState(); }
-      s.answers = s.answers && typeof s.answers === 'object' ? s.answers : {};
-      s.enabledSections = Array.isArray(s.enabledSections) ? s.enabledSections : [];
-      return s;
-    } catch (e) {
-      mismatchRaw = raw;
-      return blankState();
+    if (raw) {
+      try {
+        const s = JSON.parse(raw);
+        if (!s || typeof s !== 'object' || s.version !== VERSION) { mismatchRaw = raw; return blankState(); }
+        return normalize(s);
+      } catch (e) { mismatchRaw = raw; return blankState(); }
     }
+    if (!rawV1) return blankState();
+    // v1 → v2：格子 id 沒變，答案原樣帶過來
+    try {
+      const o = JSON.parse(rawV1);
+      if (!o || typeof o !== 'object' || o.version !== 1) { mismatchRaw = rawV1; return blankState(); }
+      const s = normalize({ updatedAt: o.updatedAt || null, currentCell: o.currentCell || null, enabledSections: o.enabledSections, answers: o.answers });
+      try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) { /* 存不進去就下次再轉 */ }
+      setTimeout(() => toast('已把上一版的資料帶過來，你填過的答案都還在。', 5000), 300);
+      return s;
+    } catch (e) { mismatchRaw = rawV1; return blankState(); }
+  }
+
+  function wipeStorage() {
+    try { localStorage.removeItem(KEY); localStorage.removeItem(KEY_V1); } catch (e) { /* 忽略 */ }
   }
 
   function save() {
@@ -309,6 +383,46 @@ textarea:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-c
   const statusOf = id => { const a = ans(id); return (a.text || '').trim() ? 'filled' : a.skipped ? 'skipped' : 'empty'; };
   const hasData = () => Object.values(S.answers).some(a => (a.text || '').trim() || a.skipped);
   const titleCell = () => C.sections.flatMap(s => s.cells).find(c => c.role === 'reportTitle');
+  const firstLine = id => (ans(id).text || '').trim().split('\n')[0];
+
+  /* ---------- 任務（章）：content.json 的 sections[].quest，同一個 no 併成一章 ---------- */
+  let quests = [];
+  function indexQuests() {
+    const map = new Map();
+    C.sections.forEach((sec, i) => {
+      const q = sec.quest || { no: 1000 + i, name: sec.title };
+      if (!map.has(q.no)) map.set(q.no, { no: q.no, name: q.name, sheet: q.sheet || q.name, reward: q.reward || '', tier: sec.tier, secs: [], cells: [] });
+      const e = map.get(q.no);
+      e.secs.push(sec);
+      e.cells.push(...sec.cells);
+    });
+    quests = [...map.values()].sort((a, b) => a.no - b.no);
+    quests.forEach(q => q.cells.forEach(c => { cellIndex[c.id].quest = q; }));
+  }
+  const chapLabel = q => q.no === 0 ? '序章' : `第 ${q.no} 章`;
+  const questAccepted = q => q.tier === 'core' || q.secs.some(s => S.enabledSections.includes(s.id));
+  function questCount(q) {
+    const n = { filled: 0, skipped: 0, empty: 0 };
+    q.cells.forEach(c => n[statusOf(c.id)]++);
+    return n;
+  }
+  // locked＝進階任務還沒接；todo＝還沒動；doing＝寫到一半；done＝每格都寫了或明確跳過
+  function questState(q) {
+    if (!questAccepted(q)) return 'locked';
+    const n = questCount(q);
+    return n.empty === q.cells.length ? 'todo' : n.empty === 0 ? 'done' : 'doing';
+  }
+  const isDone = q => questState(q) === 'done';
+  const coreQuests = () => quests.filter(q => q.tier === 'core');
+  const level = () => quests.filter(q => q.no >= 1 && isDone(q)).length;
+  const licensed = () => coreQuests().every(isDone);
+  function rank() {
+    if (licensed()) return '正式冒險者';
+    const [q0, q1] = coreQuests();
+    return q0 && q1 && isDone(q0) && isDone(q1) ? '見習冒險者' : '旅人';
+  }
+  const nextQuest = () => quests.find(q => questAccepted(q) && !isDone(q));
+  const entryCell = q => (q.cells.find(c => statusOf(c.id) === 'empty') || q.cells[0]).id;
 
   /* ---------- 路由 ---------- */
   function go(path) {
@@ -328,10 +442,14 @@ textarea:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-c
     window.scrollTo(0, 0);
     switch (screen) {
       case 'fill': return renderFill(arg);
-      case 'overview': return renderOverview();
-      case 'advanced': return renderAdvanced();
+      case 'quests':
+      case 'overview':   // v1 的舊路徑
+      case 'advanced':
+        return renderQuests();
+      case 'sheet': return renderSheet();
+      case 'done': return renderDone(arg);
       case 'export': return renderExport();
-      default: return renderWelcome();
+      default: return hasData() ? renderSheet() : renderWelcome();
     }
   }
 
@@ -344,64 +462,48 @@ textarea:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-c
   /* ---------- 開場 ---------- */
   function renderWelcome() {
     const coreCount = flowFor('core').length;
-    let resume = '';
-    let buttons = `<button class="btn primary" data-act="start">開始</button>`;
-    if (hasData()) {
-      const cur = S.currentCell && cellIndex[S.currentCell];
-      let where = '';
-      if (cur) {
-        const flow = flowFor(cur.sec.tier);
-        const idx = flow.findIndex(c => c.id === S.currentCell);
-        if (idx >= 0) where = `「${esc(cur.cell.title)}」（${cur.sec.tier === 'core' ? '核心' : '進階'}第 ${idx + 1} 格／共 ${flow.length} 格）`;
-      }
-      const when = S.updatedAt ? fmtDateTime(new Date(S.updatedAt)) : '';
-      resume = `<div class="resume">
-        <p class="label">上次的進度</p>
-        <p>${where ? `填到 ${where}` : '有填過的內容'}${when ? `<br><span class="muted">${when}</span>` : ''}</p>
-      </div>`;
-      buttons = `<button class="btn primary" data-act="resume">接續上次</button>
-        <button class="btn" data-act="start">從第一格開始</button>
-        <button class="btn quiet" data-act="overview">看總覽</button>`;
-    }
+    const chapters = coreQuests().filter(q => q.no >= 1).length;
     $app.innerHTML = `<main class="wrap welcome">
       <p class="eyebrow">創作者 IP 規劃</p>
       <h1>把自己當成一個 IP，<br>一格一格想清楚。</h1>
       <hr class="rule-double">
-      <p class="lead">這個工具一次問你一個問題。每一題都附上說明，還有一位虛構創作者「阿路」的填法給你參考。填完之後，匯出一份你自己的 IP 規劃。</p>
+      <p class="lead">這個工具把 IP 規劃拆成一章一章的任務，一次只問你一個問題。每一題都附上說明，還有一位虛構創作者「阿路」的填法給你參考。解完核心任務，領一份你自己的 IP 規劃報告。</p>
       <ul class="facts">
-        <li>核心 ${coreCount} 格，大約 60–90 分鐘，可以分好幾次填</li>
+        <li>核心 ${chapters} 章、${coreCount} 格，大約 60–90 分鐘，可以分好幾次解</li>
         <li>資料只存在你自己的瀏覽器，不會上傳到任何地方</li>
         <li>每一格都可以先跳過，不會擋住匯出</li>
       </ul>
-      ${resume}
-      <div class="btn-row">${buttons}</div>
+      <div class="btn-row">
+        <button class="btn primary" data-act="start">登記名字，開始</button>
+        <button class="btn quiet" data-act="quests">先看有哪些任務</button>
+      </div>
     </main>`;
   }
 
   /* ---------- 填寫頁 ---------- */
   function renderFill(id) {
     const entry = cellIndex[id];
-    if (!entry) return go('overview');
+    if (!entry) return go('quests');
     const { cell, sec } = entry;
     const tier = sec.tier;
     const flow = flowFor(tier);
     const idx = flow.findIndex(c => c.id === id);
-    if (idx < 0) return go('overview'); // 進階區塊沒勾
-    ctx = { id, tier, flow, idx };
+    if (idx < 0) return go('quests'); // 進階任務還沒接
+    const q = entry.quest;
+    const qi = q.cells.findIndex(c => c.id === id);
+    ctx = { id, tier, flow, idx, quest: q };
     if (S.currentCell !== id) { S.currentCell = id; scheduleSave(); }
 
     const a = ans(id);
-    const last = idx === flow.length - 1;
-    const pct = Math.round((idx + 1) / flow.length * 100);
-    const tierLabel = tier === 'core' ? '核心' : '進階';
+    const pct = Math.round((qi + 1) / q.cells.length * 100); // 經驗條＝這一章走到第幾格
     const firstOfSec = sec.cells[0].id === id;
-    const nextLabel = last ? (tier === 'core' ? '完成，看總覽' : '完成，回總覽') : '下一格';
+    const nextLabel = qi === q.cells.length - 1 ? '完成本章' : '下一格';
 
     $app.innerHTML = `
-      ${bar(`<button class="bar-link" data-act="overview">總覽</button>`,
-            `<span>${tierLabel}　第 ${idx + 1} 格／共 ${flow.length} 格</span>`, pct)}
+      ${bar(`<button class="bar-link" data-act="quests">任務</button>`,
+            `<span>${chapLabel(q)}　第 ${qi + 1} 格／共 ${q.cells.length} 格</span>`, pct)}
       <main class="wrap fill has-bar">
-        <p class="crumb">${esc(sec.title)}</p>
+        <p class="crumb"><b>${chapLabel(q)}　${esc(q.name)}</b>・${esc(sec.title)}</p>
         ${firstOfSec && sec.desc ? `<p class="sec-desc">${esc(sec.desc)}</p>` : ''}
         <h1 id="cell-title" tabindex="-1">${esc(cell.title)}${cell.titleEn ? ` <span class="en">（${esc(cell.titleEn)}）</span>` : ''}</h1>
         <p class="label">在問什麼</p>
@@ -454,87 +556,165 @@ textarea:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-c
     ta.style.height = Math.max(ta.scrollHeight + 2, 160) + 'px';
   }
 
-  /* ---------- 總覽 ---------- */
-  function renderOverview() {
-    const core = flowFor('core');
+  /* ---------- 任務頁（取代 v1 的總覽與進階勾選） ---------- */
+  const ST_LABEL = { filled: '已填', skipped: '跳過', empty: '未填' };
+  const QS_LABEL = { locked: '未接', todo: '未開始', doing: '進行中', done: '完成' };
+
+  function cellRows(q) {
+    return `<ul class="ov-list">${q.cells.map(c => {
+      const st = statusOf(c.id);
+      const text = firstLine(c.id);
+      return `<li><button class="ov-item" data-act="goto" data-id="${esc(c.id)}">
+        <span class="st st-${st}">${ST_LABEL[st]}</span>
+        <span class="ov-name">${esc(c.title)}</span>
+        <span class="ov-sum">${text ? esc(text) : '—'}</span>
+      </button></li>`;
+    }).join('')}</ul>`;
+  }
+
+  function questBlock(q) {
+    const state = questState(q);
+    const n = questCount(q);
+    const orig = q.secs.map(s => s.title).join('／');
+    const head = `<header class="q-head">
+        <p class="q-no">${chapLabel(q)}<span class="q-state q-${state}">${QS_LABEL[state]}</span></p>
+        <h2>${esc(q.name)}<small>${esc(orig)}</small></h2>
+        ${q.reward ? `<p class="q-reward"><span>獎勵</span>${esc(q.reward)}</p>` : ''}
+      </header>`;
+    if (state === 'locked') {
+      const desc = q.secs[0].desc;
+      return `<section class="quest is-locked">${head}
+        ${desc ? `<p class="q-desc">${esc(desc)}</p>` : ''}
+        <div class="q-foot"><button class="btn" data-act="accept" data-no="${q.no}">接任務（${q.cells.length} 格）</button></div>
+      </section>`;
+    }
+    const note = state === 'done' && n.skipped
+      ? `<p class="q-note">有 ${n.skipped} 格先跳過，角色卡上會留空位，隨時可以回來補。</p>` : '';
+    const drop = q.tier === 'advanced'
+      ? `<div class="q-foot"><button class="btn quiet" data-act="drop" data-no="${q.no}">放下這個任務</button></div>` : '';
+    return `<section class="quest is-${state}">${head}${note}${cellRows(q)}${drop}</section>`;
+  }
+
+  function renderQuests() {
+    const core = coreQuests();
+    const adv = quests.filter(q => q.tier === 'advanced');
+    const cells = flowFor('core');
     const count = { filled: 0, skipped: 0, empty: 0 };
-    core.forEach(c => count[statusOf(c.id)]++);
-    const left = count.skipped + count.empty;
-    const secs = [...coreSections(), ...enabledAdv()];
-    const stLabel = { filled: '已填', skipped: '跳過', empty: '未填' };
+    cells.forEach(c => count[statusOf(c.id)]++);
+    const nq = nextQuest();
+    const lic = licensed();
+    const coreLeft = core.filter(q => !isDone(q)).length;
 
-    const list = secs.map(sec => `
-      <section class="ov-sec">
-        <h2>${esc(sec.title)}<small>${sec.tier === 'core' ? '核心' : '進階'}</small></h2>
-        <ul class="ov-list">${sec.cells.map(c => {
-          const st = statusOf(c.id);
-          const text = (ans(c.id).text || '').trim().split('\n')[0];
-          return `<li><button class="ov-item" data-act="goto" data-id="${esc(c.id)}">
-            <span class="st st-${st}">${stLabel[st]}</span>
-            <span class="ov-name">${esc(c.title)}</span>
-            <span class="ov-sum">${text ? esc(text) : '—'}</span>
-          </button></li>`;
-        }).join('')}</ul>
-      </section>`).join('');
-
-    const advLabel = enabledAdv().length ? '調整或繼續填進階區塊' : '繼續填進階區塊';
     $app.innerHTML = `
-      ${bar(`<button class="bar-link" data-act="home">開場</button>`, `<span>總覽</span>`)}
+      ${bar(`<button class="bar-link" data-act="home">${hasData() ? '角色卡' : '開場'}</button>`, `<span>任務　Lv.${level()}</span>`)}
       <main class="wrap overview">
-        <h1>總覽</h1>
+        <h1>任務</h1>
         <div class="tally">
-          <span>核心 ${core.length} 格</span>
+          <span>核心 ${cells.length} 格</span>
           <span>已填 <b>${count.filled}</b></span>
           <span>跳過 <b>${count.skipped}</b></span>
           <span>未填 <b>${count.empty}</b></span>
         </div>
-        ${left ? `<p class="nudge">還有 ${left} 格沒填。沒填完也可以匯出，之後再回來補。</p>`
-               : `<p class="nudge">核心區塊全部填完了。</p>`}
-        <div class="btn-row">
-          <button class="btn primary" data-act="export">匯出報告</button>
-          <button class="btn" data-act="advanced">${advLabel}</button>
-        </div>
-        ${list}
+        ${nq ? `<p class="nudge">建議下一個：${chapLabel(nq)}「${esc(nq.name)}」。順序不強迫，想先解哪一章都可以。</p>
+                <div class="btn-row"><button class="btn primary" data-act="quest" data-no="${nq.no}">${questState(nq) === 'doing' ? '繼續' : '開始'}${chapLabel(nq)}</button></div>`
+             : `<p class="nudge">手上的任務都解完了。</p>`}
+        ${core.map(questBlock).join('')}
+        <section class="quest license">
+          <header class="q-head">
+            <p class="q-no">結業<span class="q-state q-${lic ? 'done' : 'todo'}">${lic ? '可領取' : `還差 ${coreLeft} 個任務`}</span></p>
+            <h2>冒險者執照<small>匯出報告</small></h2>
+            <p class="q-reward"><span>獎勵</span>一份你自己的 IP 規劃報告；升為正式冒險者</p>
+          </header>
+          <p class="q-desc">${lic ? '核心任務都解完了。' : '核心任務全部解完就能領取。'}報告隨時可以先匯出，沒寫完也不擋。</p>
+          <div class="q-foot"><button class="btn${lic ? ' primary' : ''}" data-act="export">${lic ? '領取執照' : '先看目前的報告'}</button></div>
+        </section>
+        ${adv.length ? `<h2 class="q-divider">進階任務<small>填了更好。接了才會進入流程和報告，之後隨時可以放下。</small></h2>${adv.map(questBlock).join('')}` : ''}
         <div class="ov-foot">
           <button class="btn danger" data-act="clear">全部清除</button>
         </div>
       </main>`;
   }
 
-  /* ---------- 進階區塊勾選 ---------- */
-  function renderAdvanced() {
-    const secs = advSections();
+  /* ---------- 章節完成 ---------- */
+  function renderDone(arg) {
+    const q = quests.find(x => String(x.no) === arg);
+    if (!q || !isDone(q)) return go('quests');
+    const n = questCount(q);
+    const nq = nextQuest();
+    const toLicense = q.tier === 'core' && licensed();
+    const primary = toLicense ? `<button class="btn primary" data-act="export">領取執照</button>`
+      : nq ? `<button class="btn primary" data-act="quest" data-no="${nq.no}">下一個：${chapLabel(nq)}「${esc(nq.name)}」</button>` : '';
+
     $app.innerHTML = `
-      ${bar(`<button class="bar-link" data-act="overview">總覽</button>`, `<span>進階區塊</span>`)}
-      <main class="wrap adv">
-        <h1>進階區塊</h1>
-        <p>這些是「填了更好」的部分。勾你想填的，沒勾的不會出現在流程和報告裡。之後隨時可以回來改。</p>
-        <div class="adv-list">${secs.map(s => {
-          const done = s.cells.filter(c => statusOf(c.id) === 'filled').length;
-          return `<label class="check">
-            <input type="checkbox" value="${esc(s.id)}" ${S.enabledSections.includes(s.id) ? 'checked' : ''}>
-            <span><b>${esc(s.title)}</b><span class="meta">${s.cells.length} 格${done ? `・已填 ${done}` : ''}</span>
-            ${s.desc ? `<span class="desc">${esc(s.desc)}</span>` : ''}</span>
-          </label>`;
-        }).join('')}</div>
+      ${bar(`<button class="bar-link" data-act="quests">任務</button>`, `<span>Lv.${level()}　${rank()}</span>`)}
+      <main class="wrap done">
+        <p class="stamp" aria-hidden="true">完成</p>
+        <p class="label">${chapLabel(q)}完成</p>
+        <h1 id="cell-title" tabindex="-1">${esc(q.name)}</h1>
+        <dl class="done-list">
+          ${q.reward ? `<dt>獎勵</dt><dd>${esc(q.reward)}</dd>` : ''}
+          <dt>現在</dt><dd>Lv.${level()}・${rank()}</dd>
+        </dl>
+        ${n.skipped ? `<p class="q-note">這一章有 ${n.skipped} 格先跳過，角色卡上會留空位，隨時可以回來補。</p>` : ''}
+        ${toLicense ? `<p class="q-note">核心任務都解完了，可以領冒險者執照——也就是你的 IP 規劃報告。</p>` : ''}
         <div class="btn-row">
-          <button class="btn primary" data-act="advStart" id="adv-start"></button>
-          <button class="btn quiet" data-act="overview">回總覽</button>
+          ${primary}
+          <button class="btn" data-act="home">看角色卡</button>
+          <button class="btn quiet" data-act="quests">回任務頁</button>
         </div>
       </main>`;
-    const update = () => {
-      const n = flowFor('advanced').length;
-      const b = document.getElementById('adv-start');
-      b.disabled = n === 0;
-      b.textContent = n ? `開始填（${n} 格）` : '先勾一組';
-    };
-    $app.querySelectorAll('.check input').forEach(inp => inp.addEventListener('change', () => {
-      const on = new Set([...$app.querySelectorAll('.check input:checked')].map(i => i.value));
-      S.enabledSections = advSections().map(s => s.id).filter(id => on.has(id)); // 照 content.json 的順序
-      save();
-      update();
-    }));
-    update();
+    document.getElementById('cell-title').focus({ preventScroll: true });
+  }
+
+  /* ---------- 角色卡（有資料時的首頁） ---------- */
+  function resumeTarget() {
+    const cur = S.currentCell && cellIndex[S.currentCell];
+    if (cur && questAccepted(cur.quest)) return { id: S.currentCell, label: `接續上次：${cur.cell.title}` };
+    const nq = nextQuest();
+    return nq ? { id: entryCell(nq), label: `${questState(nq) === 'doing' ? '繼續' : '開始'}${chapLabel(nq)}` } : null;
+  }
+
+  function renderSheet() {
+    const tc = titleCell();
+    const name = tc ? firstLine(tc.id) : '';
+    const ep = C.sections.flatMap(s => s.cells).find(c => c.role === 'epithet');
+    const epText = ep ? firstLine(ep.id) : '';
+    const epQuest = ep && cellIndex[ep.id].quest;
+    const core = flowFor('core');
+    const filledCore = core.filter(c => statusOf(c.id) === 'filled').length;
+    const rt = resumeTarget();
+
+    const blocks = quests.filter(q => q.no >= 1 && questAccepted(q)).map(q => {
+      const filled = q.cells.filter(c => statusOf(c.id) === 'filled');
+      const body = filled.length
+        ? `<dl class="sh-rows">${filled.map(c => `<dt>${c.stat ? `${esc(c.stat)}<small>${esc(c.title)}</small>` : esc(c.title)}</dt><dd>${esc(firstLine(c.id))}</dd>`).join('')}</dl>`
+        : `<p class="sh-empty">解完${chapLabel(q)}「${esc(q.name)}」後出現</p>`;
+      return `<section class="sh-block${filled.length ? '' : ' is-empty'}">
+        <h2><button class="sh-link" data-act="quest" data-no="${q.no}">${esc(q.sheet)}<small>${chapLabel(q)}・${QS_LABEL[questState(q)]}</small></button></h2>
+        ${body}
+      </section>`;
+    }).join('');
+
+    $app.innerHTML = `
+      ${bar(`<span>創作者 IP 規劃</span>`, `<button class="bar-link" data-act="quests">任務</button>`)}
+      <main class="wrap sheet">
+        <p class="eyebrow">冒險者登記卡</p>
+        <h1>${name ? esc(name) : '（還沒登記名字）'}</h1>
+        ${epText ? `<p class="epithet">「${esc(epText)}」</p>`
+                 : epQuest ? `<p class="epithet none">稱號：解完${chapLabel(epQuest)}「${esc(epQuest.name)}」後取得</p>` : ''}
+        <dl class="sh-stats">
+          <div><dt>階位</dt><dd>${rank()}</dd></div>
+          <div><dt>等級</dt><dd>Lv.${level()}</dd></div>
+          <div><dt>核心</dt><dd>${filledCore}／${core.length} 格</dd></div>
+        </dl>
+        ${S.updatedAt ? `<p class="muted small">上次更新　${fmtDateTime(new Date(S.updatedAt))}</p>` : ''}
+        <div class="btn-row">
+          ${rt ? `<button class="btn primary" data-act="resume">${esc(rt.label)}</button>` : ''}
+          <button class="btn${rt ? '' : ' primary'}" data-act="quests">任務</button>
+          <button class="btn quiet" data-act="export">${licensed() ? '執照（匯出報告）' : '匯出報告'}</button>
+        </div>
+        ${blocks}
+      </main>`;
   }
 
   /* ---------- 報告 ---------- */
@@ -579,21 +759,22 @@ textarea:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-c
       <h1>${esc(r.title)}</h1>
       <p class="date">${esc(r.date)}</p>
       ${r.secs.length ? r.secs.map(s => `<h2>${esc(s.title)}</h2>${s.cells.map(c => `<h3>${esc(c.title)}</h3><p class="text">${esc(c.text)}</p>`).join('')}`).join('')
-                      : `<p class="empty">還沒有填任何格子。回到總覽挑一格開始寫吧。</p>`}
+                      : `<p class="empty">還沒有填任何格子。回到任務頁挑一格開始寫吧。</p>`}
       ${r.appendix ? `<h2>附錄：實作資源與工具</h2>${appendixHTML(r.appendix)}` : ''}
     </article>`;
   }
 
   function renderExport() {
     $app.innerHTML = `
-      ${bar(`<button class="bar-link" data-act="overview">總覽</button>`, `<span>匯出</span>`)}
+      ${bar(`<button class="bar-link" data-act="quests">任務</button>`, `<span>${licensed() ? '執照' : '匯出'}</span>`)}
       <main class="wrap export">
-        <h1>匯出報告</h1>
-        <p class="muted">報告只放你寫的內容；說明文字、沒填和跳過的格子都不會出現。</p>
+        ${licensed() ? `<p class="label">冒險者執照</p>` : ''}
+        <h1>${licensed() ? '你的 IP 規劃報告' : '匯出報告'}</h1>
+        <p class="muted">${licensed() ? '核心任務都解完了，這份就是你的執照。' : ''}報告用的是正式的區塊名稱，方便拿給合作對象看。報告只放你寫的內容；說明文字、沒填和跳過的格子都不會出現。</p>
         <div class="btn-row">
           <button class="btn primary" data-act="copyMd">複製 Markdown</button>
           <button class="btn" data-act="print">列印／存成 PDF</button>
-          <button class="btn quiet" data-act="overview">回總覽</button>
+          <button class="btn quiet" data-act="quests">回任務頁</button>
         </div>
         <div id="fallback"></div>
         ${reportHTML()}
@@ -632,23 +813,39 @@ textarea:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-c
   /* ---------- 動作 ---------- */
   function moveTo(delta) {
     if (!ctx) return;
-    const { flow, idx, tier } = ctx;
+    const { flow, idx, quest } = ctx;
     const j = idx + delta;
-    if (j < 0) return go(tier === 'core' ? '' : 'advanced');
-    if (j >= flow.length) return go('overview');
+    if (delta > 0 && (j >= flow.length || cellIndex[flow[j].id].quest !== quest)) {
+      // 走完這一章的最後一格
+      if (isDone(quest)) return go('done/' + quest.no);
+      toast(`這一章還有 ${questCount(quest).empty} 格沒寫。寫了或按「先跳過」才算完成。`, 5000);
+      return go('quests');
+    }
+    if (j < 0) return go('quests');
     go('fill/' + flow[j].id);
+  }
+
+  const questByNo = no => quests.find(q => String(q.no) === String(no));
+  function setAccepted(q, on) {
+    const ids = new Set(S.enabledSections);
+    q.secs.forEach(s => on ? ids.add(s.id) : ids.delete(s.id));
+    S.enabledSections = advSections().map(s => s.id).filter(id => ids.has(id)); // 照 content.json 的順序
+    save();
   }
 
   const actions = {
     start: () => go('fill/' + flowFor('core')[0].id),
-    resume: () => {
-      const cur = S.currentCell && cellIndex[S.currentCell];
-      const ok = cur && flowFor(cur.sec.tier).some(c => c.id === S.currentCell);
-      go(ok ? 'fill/' + S.currentCell : 'fill/' + flowFor('core')[0].id);
-    },
+    resume: () => { const rt = resumeTarget(); go(rt ? 'fill/' + rt.id : 'quests'); },
     home: () => go(''),
-    overview: () => go('overview'),
-    advanced: () => go('advanced'),
+    quests: () => go('quests'),
+    quest: d => { const q = questByNo(d.no); if (q && questAccepted(q)) go('fill/' + entryCell(q)); },
+    accept: d => { const q = questByNo(d.no); if (!q) return; setAccepted(q, true); go('fill/' + entryCell(q)); },
+    drop: d => {
+      const q = questByNo(d.no); if (!q) return;
+      setAccepted(q, false);
+      toast('已放下。寫過的內容還留著，再接一次就會回來。');
+      render();
+    },
     export: () => go('export'),
     goto: d => go('fill/' + d.id),
     next: () => moveTo(1),
@@ -660,13 +857,12 @@ textarea:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-c
       save();
       moveTo(1);
     },
-    advStart: () => { const f = flowFor('advanced'); if (f.length) go('fill/' + f[0].id); },
     copyMd,
     print: () => { $print.innerHTML = reportHTML(); window.print(); },
     clear: () => {
       if (!confirm('確定要清除全部資料嗎？\n\n所有填過的內容都會刪除，沒辦法復原。')) return;
       clearTimeout(saveTimer); saveTimer = null;
-      try { localStorage.removeItem(KEY); } catch (e) { /* 忽略 */ }
+      wipeStorage();
       S = blankState();
       toast('已清除。');
       go('');
@@ -681,7 +877,7 @@ textarea:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-c
     },
     clearOld: () => {
       if (!confirm('確定要清除舊資料嗎？沒辦法復原。')) return;
-      try { localStorage.removeItem(KEY); } catch (e) { /* 忽略 */ }
+      wipeStorage();
       mismatchRaw = null;
       S = blankState();
       go('');
@@ -706,6 +902,7 @@ textarea:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-c
     .then(json => {
       C = json;
       indexContent();
+      indexQuests();
       S = loadState();
       render();
     })
